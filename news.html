@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新闻链接转换</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>新闻链接转换</h1>
+
+    <label for="newsId">News ID:</label>
+    <input type="text" id="newsId">
+    <button onclick="fetchJsonResponse()">Fetch JSON</button>
+
+    <div id="response"></div>
+
+    <script>
+        function fetchJsonResponse() {
+            // 获取用户输入的新闻ID
+            var newsId = $("#newsId").val();
+
+            // 构建请求URL
+            var url = "https://m.chinanews.com/api/v1/wapDetail/newsContent/chs/" + newsId + ".json";
+
+            // 发起HTTP GET请求获取JSON数据
+            $.getJSON(url, function(data) {
+                // 提取URL字段
+                var urlField = data.data.url;
+
+                // 显示URL字段
+                $("#response").text('URL: ' + urlField);
+            });
+        }
+    </script>
+</body>
+</html>
